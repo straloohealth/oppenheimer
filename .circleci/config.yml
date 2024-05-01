@@ -33,10 +33,6 @@ jobs:
           channel: test
           event: fail
           template: basic_fail_1
-      - slack/notify:
-          channel: test
-          event: pass
-          template: basic_success_1
 
 workflows:
   test:
