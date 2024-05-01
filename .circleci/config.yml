@@ -30,7 +30,7 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
       - slack/notify:
-          channel: test
+          channel: alerts
           event: fail
           template: basic_fail_1
 
