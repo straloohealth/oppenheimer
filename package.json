@@ -1,0 +1,86 @@
+{
+  "name": "hippocrates",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "test-server": "CORLEONE_URL='http://localhost:4000' TEST=1 npm run dev",
+    "build": "next build",
+    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.9.4",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.7",
+    "@mui/lab": "^5.0.0-alpha.169",
+    "@mui/material": "^5.15.15",
+    "@mui/x-charts": "^7.2.0",
+    "@mui/x-data-grid": "^6.19.6",
+    "@newrelic/next": "^0.7.0",
+    "@typeform/embed-react": "^3.11.0",
+    "@types/cookie": "^0.6.0",
+    "@types/js-cookie": "^3.0.6",
+    "@types/lodash": "^4.17.0",
+    "@types/react-plotly.js": "^2.6.3",
+    "axios": "^1.6.7",
+    "cookie": "^0.6.0",
+    "cookies-next": "^4.1.1",
+    "date-fns": "^3.4.0",
+    "graphql": "^16.8.1",
+    "hls.js": "^1.5.7",
+    "imask": "^7.3.0",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "lodash": "^4.17.21",
+    "mux-embed": "^5.2.0",
+    "newrelic": "^11.10.3",
+    "next": "14.1.0",
+    "next-client-cookies": "^1.1.0",
+    "plotly.js": "^2.31.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-imask": "^7.3.0",
+    "react-plotly.js": "^2.6.0",
+    "sharp": "^0.33.2",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@cypress/webpack-preprocessor": "^6.0.1",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/newrelic": "^9.14.3",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "crypto": "^1.0.1",
+    "cypress": "^13.6.5",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "husky": "^9.0.11",
+    "json-server": "^1.0.0-alpha.23",
+    "jsonwebtoken": "^9.0.2",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --quiet --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}
