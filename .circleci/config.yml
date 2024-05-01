@@ -8,6 +8,7 @@ jobs:
   monitor-errors-in-prod:
     docker:
       - image: cypress/browsers:node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
+        resource_class: small
     working_directory: ~/repo
 
     steps:
