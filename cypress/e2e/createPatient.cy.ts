@@ -40,5 +40,7 @@ describe('when in create patient page', () => {
 
     cy.get('button[type="submit"]').click();
     cy.url().should('include', '/patient/662d50498c97ba55612801cb');
+
+    cy.screenshot('patient-creation-complete-after-submit');
   });
 });
