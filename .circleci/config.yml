@@ -29,10 +29,19 @@ jobs:
           cypress-command: 'npm run cy:run'
       - store_artifacts:
           path: cypress/screenshots
+      - run:
+        name: Set Slack Channel
+        command: |
+          if [ "${CIRCLE_BRANCH}" == "main" ]; then
+            echo 'export SLACK_CHANNEL=alerts' >> $BASH_ENV
+          else
+            echo 'export SLACK_CHANNEL=test' >> $BASH_ENV
+          fi
       - slack/notify:
-          channel: alerts
-          event: fail
-          template: basic_fail_1
+        channel: ${SLACK_CHANNEL}
+        event: fail
+        template: basic_fail_1
+
 
 workflows:
   test:

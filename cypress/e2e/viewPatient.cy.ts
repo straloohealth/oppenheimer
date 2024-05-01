@@ -9,7 +9,7 @@ describe('when viewing a patient', () => {
         name: 'John Doe',
         firstName: 'John',
         phone: '+5511968427903',
-        cpf: '86238961570',
+        cpf: '46546717220',
         personalInfo: {
             birthDate: '1980-05-26T00:00:00',
             sex: 'MALE'
