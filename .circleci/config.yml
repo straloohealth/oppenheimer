@@ -5,7 +5,7 @@ orbs:
   cypress: cypress-io/cypress@3
 
 jobs:
-  build-and-test:
+  monitor-errors-in-prod:
     docker:
       - image: cypress/browsers:node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
     working_directory: ~/repo
@@ -30,22 +30,22 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
       - run:
-        name: Set Slack Channel
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "main" ]; then
-            echo 'export SLACK_CHANNEL=alerts' >> $BASH_ENV
-          else
-            echo 'export SLACK_CHANNEL=test' >> $BASH_ENV
-          fi
+          name: Set Slack Channel
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "main" ]; then
+              echo 'export SLACK_CHANNEL=alerts' >> $BASH_ENV
+            else
+              echo 'export SLACK_CHANNEL=test' >> $BASH_ENV
+            fi
       - slack/notify:
-        channel: ${SLACK_CHANNEL}
-        event: fail
-        template: basic_fail_1
+          channel: ${SLACK_CHANNEL}
+          event: fail
+          template: basic_fail_1
 
 
 workflows:
   test:
     jobs:
-      - build-and-test:
+      - monitor-errors-in-prod:
           context:
             - notifiers
