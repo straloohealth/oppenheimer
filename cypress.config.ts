@@ -5,7 +5,8 @@ export default defineConfig({
     baseUrl: 'https://painel.straloo.com.br',
     setupNodeEvents(on, config) {
       // implement node event listeners here
-    }
+    },
+    testIsolation: false
   },
   watchForFileChanges: true
 });

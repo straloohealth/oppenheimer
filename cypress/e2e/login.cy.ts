@@ -1,14 +1,28 @@
 export function login() {
-  const email = 'teste@straloo.com.br'
+  const email = 'teste@straloo.com.br';
   const code = '1234';
 
-  cy.visit('/login');
-  cy.get('input[name="email"]').type(email);
-  cy.get('button[type="submit"]').click();
+  cy.getCookie('token').then((cookie) => {
+    if (!cookie) {
+      return;
+    }
 
-  cy.get('input[name="code"]').type(code);
-  cy.get('button[type="submit"]').click();
-  cy.url().should('include', '/patient');
+    cy.session(
+      'login',
+      () => {
+        cy.visit('/login');
+        cy.get('input[name="email"]').type(email);
+        cy.get('button[type="submit"]').click();
+
+        cy.get('input[name="code"]').type(code);
+        cy.get('button[type="submit"]').click();
+        cy.url().should('include', '/patient');
+      },
+      {
+        cacheAcrossSpecs: true
+      }
+    );
+  });
 }
 
 describe('when in login page', () => {
