@@ -5,7 +5,7 @@ orbs:
   cypress: cypress-io/cypress@3
 
 jobs:
-  monitor-errors-in-prod:
+  test:
     docker:
       - image: cypress/browsers:node-20.11.0-chrome-121.0.6167.184-1-ff-123.0-edge-121.0.2277.128-1
     resource_class: small
@@ -31,14 +31,53 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
       - slack/notify:
-          channel: alerts
+          channel: deployments
           event: fail
           template: basic_fail_1
 
+  k8s:
+    docker:
+      - image: docker.io/danielspeixoto/gke-cli
+    resource_class: small
+    description: Deploy application to Google Kubernetes Engine
+    steps:
+      - checkout
+      - gcp-cli/setup:
+          version: 462.0.0
+      - kubernetes/install
+      - run:
+          name: Authenticate with cluster
+          command: gcloud container clusters get-credentials "$CLUSTER_NAME" --region="$GOOGLE_COMPUTE_REGION"
+      - run:
+          name: Defines image tag
+          command: sed -i "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" kubernetes/deployment.yaml
+      - kubernetes/create-or-update-resource:
+          resource-file-path: kubernetes/cronjob.yaml
+      - slack/notify:
+          channel: deployments
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          channel: deployments
+          event: pass
+          template: basic_success_1
 
 workflows:
-  test:
+  deploy:
+    when:
+      equal: [main, << pipeline.git.branch >>]
     jobs:
-      - monitor-errors-in-prod:
+      - test:
           context:
             - notifiers
+      - gcp-gcr/build-and-push-image:
+          image: oppenheimer
+          tag: $CIRCLE_SHA1
+          context: gke
+      - k8s:
+          context:
+            - gke
+            - notifiers
+          requires:
+            - test
+            - gcp-gcr/build-and-push-image
