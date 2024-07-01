@@ -3,10 +3,6 @@ export function login() {
   const code = '1234';
 
   cy.getCookie('token').then((cookie) => {
-    if (!cookie) {
-      return;
-    }
-
     cy.session(
       'login',
       () => {
