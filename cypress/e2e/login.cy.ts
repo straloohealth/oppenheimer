@@ -1,7 +1,7 @@
-export function login() {
-  const email = 'teste@straloo.com.br';
-  const code = 'falso';
+const email = 'teste@straloo.com.br';
+const code = 'falso';
 
+export function login() {
   cy.getCookie('token').then((cookie) => {
     cy.session(
       'login',
@@ -24,11 +24,10 @@ export function login() {
 describe('when in login page', () => {
   it('should be able to login', () => {
     cy.visit('/login');
-    cy.get('input[name="email"]').type('teste@straloo.com.br');
+    cy.get('input[name="email"]').type(email);
     cy.screenshot('login-page-email');
     cy.get('button[type="submit"]').click();
 
-    const code = '1234';
     cy.get('input[name="code"]').type(code);
     cy.screenshot('login-page-code');
 
