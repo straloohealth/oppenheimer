@@ -1,6 +1,6 @@
 export function login() {
   const email = 'teste@straloo.com.br';
-  const code = '1234';
+  const code = 'falso';
 
   cy.getCookie('token').then((cookie) => {
     cy.session(

@@ -1,14 +1,14 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: run-tests-cronjob
+  name: oppenheimer-cronjob
 spec:
-  schedule: "*/10 * * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: run-tests
-            image: gcr.io/inner-autonomy-371516/hippocrates:{{IMAGE_TAG}}
+          - name: oppenheimer
+            image: gcr.io/inner-autonomy-371516/oppenheimer:{{IMAGE_TAG}}
           restartPolicy: OnFailure
