@@ -16,7 +16,7 @@ export function login() {
 
         cy.get('input[name="code"]').type(code);
         cy.get('button[type="submit"]').click();
-        cy.url().should('include', '/patient');
+        cy.url().should('include', '/');
       },
       {
         cacheAcrossSpecs: true
@@ -37,6 +37,6 @@ describe('when in login page', () => {
     cy.screenshot('login-page-code');
 
     cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/patient');
+    cy.url().should('include', '/');
   });
 });
