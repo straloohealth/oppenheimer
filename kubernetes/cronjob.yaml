@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: oppenheimer-cronjob
 spec:
-  schedule: "* * * * *"
+  schedule: "*/10 * * * *"
   jobTemplate:
     spec:
       template:
