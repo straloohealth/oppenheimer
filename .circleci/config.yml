@@ -83,5 +83,4 @@ workflows:
             - gke
             - notifiers
           requires:
-            - test
             - gcp-gcr/build-and-push-image
