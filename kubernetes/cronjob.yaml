@@ -10,6 +10,6 @@ spec:
         spec:
           containers:
           - name: oppenheimer
-            image: gcr.io/inner-autonomy-371516/oppenheimer:cc6116e32aa77d77ca2e15c919eb09d8e8d2c265
+            image: gcr.io/inner-autonomy-371516/oppenheimer:{{IMAGE_TAG}}
             command: ["npm", "run", "cy:run"]
           restartPolicy: Never

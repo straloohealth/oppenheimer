@@ -1,8 +1,12 @@
 const email = 'teste@straloo.com.br';
-const code = 'falso';
+const code = '1234';
 
 export function login() {
-  cy.getCookie('token').then((cookie) => {
+  cy.getCookie('accessToken').then((cookie) => {
+    if (cookie) {
+      return;
+    }
+
     cy.session(
       'login',
       () => {
