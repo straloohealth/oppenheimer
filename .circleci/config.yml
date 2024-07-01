@@ -54,7 +54,7 @@ jobs:
           command: gcloud container clusters get-credentials "$CLUSTER_NAME" --region="$GOOGLE_COMPUTE_REGION"
       - run:
           name: Defines image tag
-          command: sed -i "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" kubernetes/deployment.yaml
+          command: sed -i "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" kubernetes/cronjob.yaml
       - kubernetes/create-or-update-resource:
           resource-file-path: kubernetes/cronjob.yaml
       - slack/notify:
