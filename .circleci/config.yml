@@ -80,7 +80,9 @@ workflows:
             - notifiers
   deploy:
     when:
-      equal: [main, << pipeline.git.branch >>]
+      and:
+        - equal: [main, << pipeline.git.branch >>]
+        - not: << pipeline.parameters.run_workflow_test >>
     jobs:
       - test:
           context:

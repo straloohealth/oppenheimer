@@ -28,7 +28,7 @@ export function login() {
 describe('when in login page', () => {
   it('should be able to login', () => {
     cy.visit('/login');
-    cy.get('input[name="email"]').type(email);
+    cy.get('input[name="email-wrong"]').type(email);
     cy.screenshot('login-page-email');
     cy.get('button[type="submit"]').click();
 
