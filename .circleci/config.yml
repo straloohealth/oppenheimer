@@ -67,6 +67,12 @@ jobs:
           template: basic_success_1
 
 workflows:
+  test:
+    when: << pipeline.parameters.run_workflow_test >>
+    jobs:
+      - test:
+          context:
+            - notifiers
   deploy:
     when:
       equal: [main, << pipeline.git.branch >>]
