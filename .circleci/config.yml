@@ -97,3 +97,4 @@ workflows:
             - notifiers
           requires:
             - gcp-gcr/build-and-push-image
+            - test
