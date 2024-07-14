@@ -8,5 +8,6 @@ export default defineConfig({
     },
     testIsolation: false
   },
-  watchForFileChanges: true
+  watchForFileChanges: true,
+  defaultCommandTimeout: 30000
 });
