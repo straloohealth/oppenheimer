@@ -34,7 +34,11 @@ jobs:
           paths:
             - ~/.npm
           key: v2-dependencies-{{ checksum "package.json" }}
-
+      - run:
+        name: Run tests
+        command: npm test
+      - store_test_results:
+        path: test-results
       - cypress/run-tests:
           cypress-command: 'npm run cy:run'
       - store_artifacts:
