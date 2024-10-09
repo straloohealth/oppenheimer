@@ -39,7 +39,7 @@ jobs:
         path: test-results
       - cypress/run-tests:
           cypress-command: 'npm run cy:run'
-      - store_artifacts:
+      - store_test_results:
           path: cypress/screenshots
       - slack/notify:
           channel: deployments
