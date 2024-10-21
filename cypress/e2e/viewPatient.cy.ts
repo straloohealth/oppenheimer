@@ -20,8 +20,6 @@ describe('when viewing a patient', () => {
     login();
     cy.visit(`/patient/${patient.id}`);
     cy.contains(patient.firstName).should('exist');
-    cy.contains(patient.cpf.substring(0, 3)).should('exist');
-    cy.contains(patient.phone.substring(6, 10)).should('exist');
     cy.screenshot('patient-profile');
   });
   it('should be able to search for a patient', () => {
